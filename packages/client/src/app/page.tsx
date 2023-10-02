@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { APP_TITLE } from '@/shared/config';
 
 const RootPage: React.FC = () => {
