@@ -1,18 +1,22 @@
-import type { Metadata } from 'next';
+import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { APP_TITLE } from '@/shared/config';
+import { PageHeader } from '@/widgets/page-header';
 import './globals.css';
 
 const interFont = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Marketplace',
-  description: 'Laptops, phones, and more',
+  title: APP_TITLE,
 };
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en" className={interFont.className}>
-      <body>{children}</body>
+      <body className="mx-auto w-full max-w-[960px]">
+        <PageHeader className="sticky top-0" />
+        {children}
+      </body>
     </html>
   );
 };

@@ -1,5 +1,5 @@
 const ProductPage: React.FC = () => {
-  return <div>ProductPage</div>;
+  return <div>Product</div>;
 };
 
 export default ProductPage;
