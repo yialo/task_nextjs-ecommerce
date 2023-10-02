@@ -1,12 +1,9 @@
-import Image from 'next/image';
-
-const Home: React.FC = () => {
+const RootPage: React.FC = () => {
   return (
     <main>
-      <h1>Next.js + Tailwind CSS</h1>
-      <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+      <h1>Marketplace</h1>
     </main>
   );
 };
 
-export default Home;
+export default RootPage;

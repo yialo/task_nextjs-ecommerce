@@ -20,6 +20,7 @@
     "autoprefixer": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "lucide-react": "0.279.0",
     "postcss": "latest",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4",
