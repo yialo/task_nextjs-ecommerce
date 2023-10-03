@@ -7,12 +7,15 @@ export const dynamic = 'force-dynamic';
 
 const HomePage: React.FC = async () => {
   const response = await readProductList();
-  const { data: products, pageCount } = response;
+  const { data: products, pageCount, total } = response;
 
   return (
     <main className="page-center-container p-4">
       <h1 className="sr-only">{APP_TITLE}</h1>
-      <p>All products</p>
+      <div className="mb-4 flex items-baseline justify-between">
+        <p className="text-xl font-bold">Product list</p>
+        <span>{`${total} products`}</span>
+      </div>
       <ul className="grid grid-cols-3 gap-4">
         {products.map((product) => {
           return (

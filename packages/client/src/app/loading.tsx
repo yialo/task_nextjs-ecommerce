@@ -1,5 +1,7 @@
 const Loading: React.FC = () => {
-  return <div>Loading...</div>;
+  return (
+    <div className="page-center-container p-4 text-center">Loading...</div>
+  );
 };
 
 export default Loading;

@@ -13,7 +13,7 @@ export default function Error({ error, reset }: Props) {
   }, [error]);
 
   return (
-    <div>
+    <div className="page-center-container">
       <p className="text-xl">Something went wrong!</p>
       <button type="button" onClick={reset}>
         Try again
