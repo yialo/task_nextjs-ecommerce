@@ -14,7 +14,7 @@ const HomePage: React.FC = async () => {
       <h1 className="sr-only">{APP_TITLE}</h1>
       <div className="mb-2 flex items-baseline justify-between px-4">
         <div className="text-xl font-bold">Product list</div>
-        <div>{`${total} products`}</div>
+        <div>{`Total products count: ${total}`}</div>
       </div>
       <ul className="mb-4 grid grid-cols-3 gap-6">
         {products.map((product) => {
