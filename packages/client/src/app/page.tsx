@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ProductCard, readProductList } from '@/entities/product';
+import { ProductCard, readAllProducts } from '@/entities/product';
 import { APP_TITLE } from '@/shared/config';
 
 export const dynamic = 'force-dynamic';
 
 const HomePage: React.FC = async () => {
-  const products = await readProductList();
+  const products = await readAllProducts();
 
   return (
     <main className="page-center-container p-4">
