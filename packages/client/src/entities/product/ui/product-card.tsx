@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { cn } from '@/shared/lib/cn';
 import { Product } from '../config';
 
@@ -11,7 +12,9 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 
   return (
     <article className={cn('flex', className)}>
-      <h2>{name}</h2>
+      <h2 className="text-lg font-semibold">
+        <Link href={`/product/${product.id}`}>{name}</Link>
+      </h2>
     </article>
   );
 };

@@ -1,4 +1,4 @@
-import { readAllProducts } from '@/entities/product';
+import { readAllProducts, readProductById } from '@/entities/product';
 
 interface Props {
   params: {
@@ -7,16 +7,19 @@ interface Props {
 }
 
 export const generateStaticParams = async () => {
-  const products = await readAllProducts();
+  const { data: products } = await readAllProducts();
   return products.map((product) => ({
-    id: product.id,
+    id: String(product.id),
   }));
 };
 
-const ProductPage: React.FC<Props> = ({ params }) => {
+const ProductPage: React.FC<Props> = async ({ params }) => {
+  const product = await readProductById(params.id);
+
   return (
     <main className="page-center-container">
       <h1>Product: {params.id}</h1>
+      <pre>{JSON.stringify(product, null, 2)}</pre>
     </main>
   );
 };
