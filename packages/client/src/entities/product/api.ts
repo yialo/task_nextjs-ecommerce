@@ -1,3 +1,4 @@
+import { API_URL_BASE } from '@/shared/config';
 import { Product } from './config';
 
 interface ProductListResponseResult {
@@ -8,8 +9,8 @@ interface ProductListResponseResult {
   page: number;
 }
 
-export const readAllProducts = async () => {
-  const response = await fetch('http://localhost:3001/product/?page=1', {
+export const readAllProducts = async (): Promise<ProductListResponseResult> => {
+  const response = await fetch(`${API_URL_BASE}/product/?page=1`, {
     headers: { 'Content-Type': 'application/json' },
   });
 
@@ -17,12 +18,11 @@ export const readAllProducts = async () => {
     throw new Error('Failed to fetch products');
   }
 
-  const result: ProductListResponseResult = await response.json();
-  return result;
+  return response.json();
 };
 
 export const readProductById = async (id: number): Promise<Product> => {
-  const response = await fetch(`http://localhost:3001/product/${id}`, {
+  const response = await fetch(`${API_URL_BASE}/product/${id}`, {
     headers: { 'Content-Type': 'application/json' },
   });
 
