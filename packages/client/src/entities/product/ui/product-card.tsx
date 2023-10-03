@@ -1,10 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { AddToCartButton } from '@/features/add-to-cart';
 import { cn } from '@/shared/lib/cn';
 import { Product } from '../config';
+import { ProductImage } from './product-image';
 
 interface Props {
   product: Product;
@@ -25,12 +24,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
         href={`/product/${product.id}`}
         className="col-span-2 overflow-hidden rounded-xl"
       >
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={384}
-          height={629}
-        />
+        <ProductImage product={product} />
       </Link>
       <Link
         href={`/product/${product.id}`}

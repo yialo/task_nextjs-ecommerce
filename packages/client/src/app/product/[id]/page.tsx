@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { ArrowLeftIcon } from 'lucide-react';
-import { readProductById } from '@/entities/product';
+import { ProductImage, readProductById } from '@/entities/product';
 import { AddToCartButton } from '@/features/add-to-cart';
 
 const unescapeHtml = (escapedHtml: string) => {
@@ -32,12 +32,10 @@ const ProductPage: React.FC<Props> = async ({ params }) => {
         <ArrowLeftIcon strokeWidth={1} aria-hidden />
         Back to products
       </Link>
-      <Image
+      <ProductImage
         className="rounded-lg md:col-start-2"
-        src={image}
-        alt={name}
-        width={384}
-        height={629}
+        product={product}
+        priority
       />
       <div className="grid content-start gap-y-4 max-md:px-4 max-md:py-4 md:row-start-1">
         <Link className="flex gap-1 justify-self-start max-md:hidden" href="/">
