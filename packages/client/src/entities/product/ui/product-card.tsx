@@ -32,8 +32,11 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
           height={629}
         />
       </Link>
-      <Link href={`/product/${product.id}`} className="col-span-2">
-        <h2 className="line-clamp-1 text-lg font-semibold">{name}</h2>
+      <Link
+        href={`/product/${product.id}`}
+        className="col-span-2 max-w-[384px]"
+      >
+        <h2 className="truncate text-lg font-semibold">{name}</h2>
       </Link>
       <div className="text-lg font-semibold">{price}</div>
       <Button
