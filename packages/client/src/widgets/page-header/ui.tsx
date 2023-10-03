@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCartIcon } from 'lucide-react';
+import { CartCounterBadge } from '@/features/add-to-cart';
 import { APP_TITLE } from '@/shared/config';
 import { cn } from '@/shared/lib/cn';
 
@@ -30,10 +31,16 @@ export const PageHeader: React.FC<Props> = ({ className }) => {
           </Link>
           <Link
             href="/cart"
-            className="ml-auto transition-transform hover:rotate-12"
+            className="group relative ml-auto transition-transform"
             aria-label="Go to cart"
           >
-            <ShoppingCartIcon width={32} height={32} aria-hidden />
+            <CartCounterBadge className="absolute -right-1 -top-1 z-[1]" />
+            <ShoppingCartIcon
+              className="group-hover:rotate-12"
+              width={32}
+              height={32}
+              aria-hidden
+            />
           </Link>
         </nav>
       </div>
