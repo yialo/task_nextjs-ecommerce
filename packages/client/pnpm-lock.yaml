@@ -11,6 +11,9 @@ dependencies:
   effector:
     specifier: 22.8.7
     version: 22.8.7
+  effector-react:
+    specifier: 22.5.4
+    version: 22.5.4(effector@22.8.7)(react@18.2.0)
   next:
     specifier: 13.5.4
     version: 13.5.4(react-dom@18.2.0)(react@18.2.0)

@@ -14,7 +14,7 @@ const HomePage: React.FC = async () => {
         <div className="text-xl font-bold">Product list</div>
         <div>{`Total products count: ${products.length}`}</div>
       </div>
-      <ul className="mb-4 grid grid-cols-3 gap-6">
+      <ul className="mb-4 grid grid-cols-[minmax(auto,_416px)] justify-center gap-6 sm:grid-cols-[repeat(auto-fill,_minmax(280px,_auto))]">
         {products.map((product) => {
           return (
             <li key={product.id}>

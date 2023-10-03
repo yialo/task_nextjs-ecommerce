@@ -25,8 +25,8 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
         <Image
           src={product.image}
           alt={product.name}
-          width={300}
-          height={200}
+          width={384}
+          height={629}
         />
       </Link>
       <Link href={`/product/${product.id}`} className="col-span-2">
