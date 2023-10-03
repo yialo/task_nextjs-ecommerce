@@ -1,15 +1,15 @@
 'use client';
 
-import { useUnit } from 'effector-react';
+import { useAtomValue } from 'jotai';
 import { cn } from '@/shared/lib/cn';
-import { $cart } from '../model';
+import { cartAtom } from '../model';
 
 interface Props {
   className?: string;
 }
 
 export const CartCounterBadge: React.FC<Props> = ({ className }) => {
-  const cart = useUnit($cart);
+  const cart = useAtomValue(cartAtom);
 
   if (cart.length === 0) return null;
 
