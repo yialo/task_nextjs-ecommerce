@@ -21,3 +21,9 @@
     background-color: #ffffff;
   }
 }
+
+@layer components {
+  .page-center-container {
+    @apply mx-auto w-full max-w-[960px];
+  }
+}

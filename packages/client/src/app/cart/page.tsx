@@ -6,7 +6,11 @@ export const metadata: Metadata = {
 };
 
 const CartPage: React.FC = () => {
-  return <div>Cart</div>;
+  return (
+    <main className="page-center-container p-4">
+      <h1>Cart</h1>
+    </main>
+  );
 };
 
 export default CartPage;

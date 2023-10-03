@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en" className={interFont.className}>
-      <body className="mx-auto w-full max-w-[960px]">
+      <body>
         <PageHeader className="sticky top-0" />
         {children}
       </body>
