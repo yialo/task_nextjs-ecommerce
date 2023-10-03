@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/shared/lib/cn';
+import { Button } from '@/shared/ui/button';
 import { Product } from '../config';
 
 interface Props {
@@ -9,7 +12,7 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({ product, className }) => {
-  const { name, price } = product;
+  const { id, name, price } = product;
 
   return (
     <article
@@ -33,12 +36,13 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
         <h2 className="line-clamp-1 text-lg font-semibold">{name}</h2>
       </Link>
       <div className="text-lg font-semibold">{price}</div>
-      <button
-        className="rounded bg-pink-200 px-4 py-3 text-lg font-medium transition-colors duration-100 hover:bg-pink-300 hover:text-slate-950"
-        type="button"
+      <Button
+        onClick={() => {
+          console.log(`Add to cart product with id: ${id}`);
+        }}
       >
         Add to cart
-      </button>
+      </Button>
     </article>
   );
 };
