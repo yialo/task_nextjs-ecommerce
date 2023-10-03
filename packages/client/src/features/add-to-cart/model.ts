@@ -1,26 +1,33 @@
 import * as React from 'react';
-import { atom, useSetAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 
-export const cartAtom = atom<number[]>([]);
+const cartProductIdsAtom = atom<number[]>([]);
 
-export const useAddProductIdToCart = () => {
-  const setCart = useSetAtom(cartAtom);
+export const useCartModel = () => {
+  const [productIds, setProductIds] = useAtom(cartProductIdsAtom);
 
-  return React.useCallback(
+  const addProductId = React.useCallback(
     (productId: number) => {
-      setCart((ids) => [...ids, productId]);
+      setProductIds((ids) => [...ids, productId]);
     },
-    [setCart],
+    [setProductIds],
   );
-};
 
-export const useRemoveProductIdFromCart = () => {
-  const setCart = useSetAtom(cartAtom);
-
-  return React.useCallback(
+  const removeProductId = React.useCallback(
     (productId: number) => {
-      setCart((ids) => ids.filter((id) => id !== productId));
+      setProductIds((ids) => ids.filter((id) => id !== productId));
     },
-    [setCart],
+    [setProductIds],
   );
+
+  const clearCart = React.useCallback(() => {
+    setProductIds([]);
+  }, [setProductIds]);
+
+  return {
+    productIds,
+    addProductId,
+    removeProductId,
+    clearCart,
+  };
 };

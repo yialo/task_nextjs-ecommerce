@@ -2,16 +2,16 @@
 
 import { useAtomValue } from 'jotai';
 import { cn } from '@/shared/lib/cn';
-import { cartAtom } from '../model';
+import { useCartModel } from '../model';
 
 interface Props {
   className?: string;
 }
 
 export const CartCounterBadge: React.FC<Props> = ({ className }) => {
-  const cart = useAtomValue(cartAtom);
+  const { productIds } = useCartModel();
 
-  if (cart.length === 0) return null;
+  if (productIds.length === 0) return null;
 
   return (
     <div
@@ -20,7 +20,7 @@ export const CartCounterBadge: React.FC<Props> = ({ className }) => {
         className,
       )}
     >
-      {cart.length}
+      {productIds.length}
     </div>
   );
 };

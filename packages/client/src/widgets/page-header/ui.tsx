@@ -31,12 +31,12 @@ export const PageHeader: React.FC<Props> = ({ className }) => {
           </Link>
           <Link
             href="/cart"
-            className="group relative ml-auto transition-transform"
+            className="group relative ml-auto"
             aria-label="Go to cart"
           >
             <CartCounterBadge className="absolute -right-1 -top-1 z-[1]" />
             <ShoppingCartIcon
-              className="group-hover:rotate-12"
+              className="transition-transform duration-100 group-hover:rotate-6"
               width={32}
               height={32}
               aria-hidden

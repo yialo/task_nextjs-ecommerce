@@ -13,7 +13,7 @@ const ErrorBoundary: React.FC<Props> = ({ error, reset }) => {
   }, [error]);
 
   return (
-    <div className="page-center-container">
+    <div className="page-center-container px-8 py-6">
       <p className="mb-4 text-xl font-medium">Something went wrong!</p>
       <button
         className="rounded-lg bg-slate-900 px-4 py-3 text-white"
