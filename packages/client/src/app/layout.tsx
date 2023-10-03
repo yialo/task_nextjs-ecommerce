@@ -8,6 +8,7 @@ const interFont = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: APP_TITLE,
+  description: 'Women wear shop',
 };
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
