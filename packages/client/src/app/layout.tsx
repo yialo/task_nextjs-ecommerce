@@ -2,7 +2,7 @@ import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { APP_TITLE } from '@/shared/config';
 import { PageHeader } from '@/widgets/page-header';
-import './globals.css';
+import './global.css';
 
 const interFont = Inter({ subsets: ['latin'] });
 

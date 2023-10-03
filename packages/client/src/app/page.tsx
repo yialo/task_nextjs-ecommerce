@@ -12,11 +12,11 @@ const HomePage: React.FC = async () => {
   return (
     <main className="page-center-container p-4">
       <h1 className="sr-only">{APP_TITLE}</h1>
-      <div className="mb-4 flex items-baseline justify-between">
-        <p className="text-xl font-bold">Product list</p>
-        <span>{`${total} products`}</span>
+      <div className="mb-2 flex items-baseline justify-between px-4">
+        <div className="text-xl font-bold">Product list</div>
+        <div>{`${total} products`}</div>
       </div>
-      <ul className="grid grid-cols-3 gap-4">
+      <ul className="mb-4 grid grid-cols-3 gap-6">
         {products.map((product) => {
           return (
             <li key={product.id}>
@@ -25,7 +25,7 @@ const HomePage: React.FC = async () => {
           );
         })}
       </ul>
-      <div className="flex gap-x-4">
+      <div className="flex justify-center gap-x-4">
         {Array.from({ length: pageCount }).map((_, i) => {
           return (
             <Link
