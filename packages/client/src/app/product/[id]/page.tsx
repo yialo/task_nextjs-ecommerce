@@ -3,7 +3,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { ArrowLeftIcon } from 'lucide-react';
 import { readProductById } from '@/entities/product';
-import { Button } from '@/shared/ui/button';
+import { AddToCartButton } from '@/features/add-to-cart';
 
 const unescapeHtml = (escapedHtml: string) => {
   return escapedHtml
@@ -50,15 +50,7 @@ const ProductPage: React.FC<Props> = async ({ params }) => {
           dangerouslySetInnerHTML={{ __html: unescapedDescription }}
         />
         <div className="text-xl font-semibold">{`Price: ${price}`}</div>
-        {/* @ts-ignore */}
-        <Button
-          className="w-full max-w-[400px]"
-          // onClick={() => {
-          //   console.log(`Add to cart product with id: ${id}`);
-          // }}
-        >
-          Add to cart
-        </Button>
+        <AddToCartButton className="w-full max-w-[400px]" productId={id} />
       </div>
     </main>
   );

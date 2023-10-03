@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { AddToCartButton } from '@/features/add-to-cart';
 import { cn } from '@/shared/lib/cn';
-import { Button } from '@/shared/ui/button';
 import { Product } from '../config';
 
 interface Props {
@@ -39,13 +39,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
         <h2 className="truncate text-lg font-semibold">{name}</h2>
       </Link>
       <div className="text-lg font-semibold">{price}</div>
-      <Button
-        onClick={() => {
-          console.log(`Add to cart product with id: ${id}`);
-        }}
-      >
-        Add to cart
-      </Button>
+      <AddToCartButton productId={id} />
     </article>
   );
 };
