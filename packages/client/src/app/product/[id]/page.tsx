@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import * as React from 'react';
+import { ArrowLeftIcon } from 'lucide-react';
 import { readProductById } from '@/entities/product';
 import { Button } from '@/shared/ui/button';
 
@@ -25,16 +27,24 @@ const ProductPage: React.FC<Props> = async ({ params }) => {
   const unescapedDescription = unescapeHtml(description);
 
   return (
-    <main className="page-center-container grid justify-items-center gap-6 max-md:gap-4 md:grid-cols-[1fr_auto] md:px-8 md:py-6">
+    <main className="page-center-container grid justify-items-center md:grid-cols-[1fr_auto] md:gap-x-6 md:px-8 md:py-6">
+      <Link className="flex gap-1 justify-self-start p-2 md:hidden" href="/">
+        <ArrowLeftIcon strokeWidth={1} aria-hidden />
+        Back to products
+      </Link>
       <Image
-        className="md:col-start-2"
+        className="rounded-lg md:col-start-2"
         src={image}
         alt={name}
         width={384}
         height={629}
       />
-      <div className="grid content-start gap-y-4 max-md:px-4 max-md:pb-4 md:row-start-1">
-        <h1 className="text-xl font-semibold">{name}</h1>
+      <div className="grid content-start gap-y-4 max-md:px-4 max-md:py-4 md:row-start-1">
+        <Link className="flex gap-1 justify-self-start max-md:hidden" href="/">
+          <ArrowLeftIcon strokeWidth={1} aria-hidden />
+          Back to products
+        </Link>
+        <h1 className="text-xl font-semibold md:text-2xl">{name}</h1>
         <div
           className="third-party-html"
           dangerouslySetInnerHTML={{ __html: unescapedDescription }}
