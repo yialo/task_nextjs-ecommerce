@@ -1,7 +1,7 @@
 import { API_URL_BASE } from '@/shared/config';
 import { Product } from './config';
 
-interface ProductListResponse {
+interface ProductPageResponse {
   data: Product[];
   count: number;
   total: number;
@@ -9,9 +9,7 @@ interface ProductListResponse {
   page: number;
 }
 
-export const readProductList = async (
-  page = 1,
-): Promise<ProductListResponse> => {
+const readProductPage = async (page: number): Promise<ProductPageResponse> => {
   const response = await fetch(`${API_URL_BASE}/product/?page=${page}`, {
     headers: { 'Content-Type': 'application/json' },
   });
@@ -21,6 +19,20 @@ export const readProductList = async (
   }
 
   return response.json();
+};
+
+export const readProductList = async (): Promise<Product[]> => {
+  const { data: firstPageProducts, pageCount } = await readProductPage(1);
+  const products: Product[] = [...firstPageProducts];
+
+  if (pageCount > 1) {
+    for (let i = 2; i <= pageCount; i++) {
+      const productPage = await readProductPage(i);
+      products.push(...productPage.data);
+    }
+  }
+
+  return products;
 };
 
 export const readProductById = async (id: number): Promise<Product> => {
