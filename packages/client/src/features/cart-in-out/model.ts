@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
-const cartProductIdsAtom = atom<number[]>([]);
+const cartProductIdsAtom = atomWithStorage<number[]>('cart-product-ids', []);
 
 export const useCartModel = () => {
   const [productIds, setProductIds] = useAtom(cartProductIdsAtom);

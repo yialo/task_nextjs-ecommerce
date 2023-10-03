@@ -1,63 +1,26 @@
 'use client';
 
 import * as React from 'react';
-import { Product, readProductsByIds } from '@/entities/product';
 import { useCartModel } from '@/features/cart-in-out/model';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
+import { useCartProductsQuery } from './api';
 
 interface Props {
   className?: string;
 }
 
 export const Cart: React.FC<Props> = ({ className }) => {
-  const [productsQuery, setProductsQuery] = React.useState<{
-    data: Product[];
-    error: Error | null;
-    isFetching: boolean;
-    isInitail: boolean;
-  }>({
-    data: [],
-    error: null,
-    isFetching: false,
-    isInitail: true,
-  });
-
   const { productIds } = useCartModel();
-
-  React.useEffect(() => {
-    (async () => {
-      setProductsQuery((prev) => ({
-        ...prev,
-        isFetching: true,
-        isInitail: false,
-      }));
-      const newProducts = await readProductsByIds(productIds);
-      setProductsQuery((prev) => ({
-        ...prev,
-        data: newProducts,
-        error: null,
-        isFetching: false,
-      }));
-      try {
-      } catch (error) {
-        setProductsQuery((prev) => ({
-          ...prev,
-          data: [],
-          error: error instanceof Error ? error : new Error('Unknown error'),
-          isFetching: false,
-        }));
-      }
-    })();
-  }, [productIds]);
+  const productsQuery = useCartProductsQuery(productIds);
 
   return (
-    <div className={cn('grid', className)}>
+    <div className={cn('grid items-start', className)}>
       {(() => {
         const fallbackClassName =
           'text-slate-600 self-center justify-self-center text-xl font-semibold';
 
-        if (productsQuery.isInitail) {
+        if (productsQuery.isInitail || productsQuery.isFetching) {
           return <div className={fallbackClassName}>Loading...</div>;
         }
         if (productsQuery.error) {
