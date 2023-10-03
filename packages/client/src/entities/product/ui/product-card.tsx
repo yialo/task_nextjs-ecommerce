@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/shared/lib/cn';
 import { Product } from '../config';
@@ -13,6 +14,12 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
   return (
     <article className={cn('flex', className)}>
       <h2 className="text-lg font-semibold">
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={300}
+          height={200}
+        />
         <Link href={`/product/${product.id}`}>{name}</Link>
       </h2>
     </article>
