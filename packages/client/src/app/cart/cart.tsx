@@ -18,13 +18,20 @@ export const Cart: React.FC<Props> = ({ className }) => {
     <div className={cn('grid items-start', className)}>
       {(() => {
         const fallbackClassName =
-          'text-slate-600 self-center justify-self-center text-xl font-semibold';
+          'grid gap-4 text-slate-600 self-center justify-self-center text-xl font-semibold';
 
         if (productsQuery.isInitail || productsQuery.isFetching) {
           return <div className={fallbackClassName}>Loading...</div>;
         }
         if (productsQuery.error) {
-          return <div className={fallbackClassName}>Something went wrong</div>;
+          return (
+            <div className={fallbackClassName}>
+              Something went wrong
+              <Button variant="negative" onClick={productsQuery.retry}>
+                Retry
+              </Button>
+            </div>
+          );
         }
         if (!productsQuery.data.length) {
           return <div className={fallbackClassName}>Cart is empty</div>;

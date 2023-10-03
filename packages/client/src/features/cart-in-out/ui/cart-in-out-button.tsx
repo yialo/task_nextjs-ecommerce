@@ -16,7 +16,7 @@ export const CartInOutButton: React.FC<Props> = ({ className, productId }) => {
   return (
     <Button
       className={className}
-      variant={isProductInCart ? 'negative' : 'positive'}
+      variant={isProductInCart ? 'neutral' : 'positive'}
       onClick={() => {
         isProductInCart ? removeProductId(productId) : addProductId(productId);
       }}

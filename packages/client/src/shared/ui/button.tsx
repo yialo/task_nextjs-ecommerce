@@ -5,7 +5,7 @@ interface Props {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   type?: HTMLButtonElement['type'];
-  variant?: 'positive' | 'negative';
+  variant?: 'positive' | 'negative' | 'neutral';
 }
 
 export const Button: React.FC<Props> = ({
@@ -19,9 +19,14 @@ export const Button: React.FC<Props> = ({
     <button
       className={cn(
         'rounded-md px-4 py-3 text-lg font-medium transition-colors duration-100 hover:text-slate-950',
-        variant === 'positive'
-          ? 'bg-pink-200 hover:bg-pink-300 active:bg-pink-100'
-          : 'bg-amber-200 hover:bg-amber-300 active:bg-amber-100',
+        {
+          'bg-pink-200 hover:bg-pink-300 active:bg-pink-100':
+            variant === 'positive',
+          'bg-amber-200 hover:bg-amber-300 active:bg-amber-100':
+            variant === 'neutral',
+          'bg-slate-900 text-white hover:bg-slate-800 hover:text-slate-50 active:bg-slate-700':
+            variant === 'negative',
+        },
         className,
       )}
       type={type}

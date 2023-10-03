@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { Button } from '@/shared/ui/button';
 
 interface Props {
   error: Error;
@@ -15,13 +16,9 @@ const ErrorBoundary: React.FC<Props> = ({ error, reset }) => {
   return (
     <div className="page-center-container px-8 py-6">
       <p className="mb-4 text-xl font-medium">Something went wrong!</p>
-      <button
-        className="rounded-lg bg-slate-900 px-4 py-3 text-white"
-        type="button"
-        onClick={reset}
-      >
+      <Button variant="negative" onClick={reset}>
         Try again
-      </button>
+      </Button>
     </div>
   );
 };
