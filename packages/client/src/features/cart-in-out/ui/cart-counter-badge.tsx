@@ -1,6 +1,5 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
 import { cn } from '@/shared/lib/cn';
 import { useCartModel } from '../model';
 

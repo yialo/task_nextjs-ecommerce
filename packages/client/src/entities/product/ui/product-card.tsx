@@ -1,17 +1,20 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { CartInOutButton } from '@/features/add-to-cart';
 import { cn } from '@/shared/lib/cn';
 import { Product } from '../config';
 import { ProductImage } from './product-image';
 
 interface Props {
+  button: React.ReactNode;
   product: Product;
   className?: string;
 }
 
-export const ProductCard: React.FC<Props> = ({ product, className }) => {
-  const { id, name, price } = product;
+export const ProductCard: React.FC<Props> = ({
+  button,
+  product,
+  className,
+}) => {
+  const { name, price } = product;
 
   return (
     <article
@@ -33,7 +36,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
         <h2 className="truncate text-lg font-semibold">{name}</h2>
       </Link>
       <div className="text-lg font-semibold">{price}</div>
-      <CartInOutButton productId={id} />
+      {button}
     </article>
   );
 };

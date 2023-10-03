@@ -47,3 +47,7 @@ export const readProductById = async (id: number): Promise<Product> => {
 
   return response.json();
 };
+
+export const readProductsByIds = async (ids: number[]): Promise<Product[]> => {
+  return Promise.all(ids.map(readProductById));
+};

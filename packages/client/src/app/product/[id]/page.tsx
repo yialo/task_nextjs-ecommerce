@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { ArrowLeftIcon } from 'lucide-react';
 import { ProductImage, readProductById } from '@/entities/product';
-import { CartInOutButton } from '@/features/add-to-cart';
+import { CartInOutButton } from '@/features/cart-in-out/ui';
 
 const unescapeHtml = (escapedHtml: string) => {
   return escapedHtml
@@ -23,7 +22,7 @@ interface Props {
 
 const ProductPage: React.FC<Props> = async ({ params }) => {
   const product = await readProductById(params.id);
-  const { id, name, description, image, price } = product;
+  const { id, name, description, price } = product;
   const unescapedDescription = unescapeHtml(description);
 
   return (

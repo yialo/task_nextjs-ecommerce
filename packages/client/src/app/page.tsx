@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ProductCard, readAllProducts } from '@/entities/product';
+import { CartInOutButton } from '@/features/cart-in-out/ui';
 import { APP_TITLE } from '@/shared/config';
 
 export const dynamic = 'force-dynamic';
@@ -18,7 +19,10 @@ const HomePage: React.FC = async () => {
         {products.map((product) => {
           return (
             <li key={product.id}>
-              <ProductCard product={product} />
+              <ProductCard
+                product={product}
+                button={<CartInOutButton productId={product.id} />}
+              />
             </li>
           );
         })}
