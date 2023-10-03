@@ -27,4 +27,12 @@
   .page-center-container {
     @apply mx-auto w-full max-w-[1200px];
   }
+
+  .third-party-html {
+    @apply text-lg;
+  }
+
+  .third-party-html > div:last-child {
+    display: none;
+  }
 }

@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang="en" className={interFont.className}>
-      <body>
+      <body className="flex h-screen flex-col">
         <EffectorNext>
-          <PageHeader className="sticky top-0" />
+          <PageHeader className="sticky top-0 shrink-0" />
           {children}
         </EffectorNext>
       </body>

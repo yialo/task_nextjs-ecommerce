@@ -16,7 +16,7 @@ export const Button: React.FC<Props> = ({
   return (
     <button
       className={cn(
-        'rounded bg-pink-200 px-4 py-3 text-lg font-medium transition-colors duration-100 hover:bg-pink-300 hover:text-slate-950',
+        'rounded bg-pink-200 px-4 py-3 text-lg font-medium transition-colors duration-100 hover:bg-pink-300 hover:text-slate-950 active:bg-pink-100',
         className,
       )}
       type={type}
