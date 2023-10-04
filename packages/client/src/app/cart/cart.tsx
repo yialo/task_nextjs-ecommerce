@@ -2,12 +2,22 @@
 
 import Link from 'next/link';
 import * as React from 'react';
+import { XOctagonIcon } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { ProductCartCard } from '@/entities/product';
 import { useCartModel } from '@/features/cart-in-out/model';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { useCartProductsQuery, usePlaceOrderMutation } from './api';
+
+const showcaseLink = (
+  <Link
+    href="/"
+    className="text-md rounded-lg bg-pink-100 px-3 py-1.5 text-center font-medium text-slate-800 hover:bg-pink-200 active:bg-pink-50"
+  >
+    To showcase
+  </Link>
+);
 
 interface Props {
   className?: string;
@@ -16,8 +26,11 @@ interface Props {
 export const Cart: React.FC<Props> = ({ className }) => {
   const cartModel = useCartModel();
   const productsQuery = useCartProductsQuery(cartModel.productIds);
-
   const placeOrderMutation = usePlaceOrderMutation();
+
+  const [createdOrderId, setCreatedOrderId] = React.useState<number | null>(
+    null,
+  );
 
   const fallbackClassName = cn(
     'flex text-slate-600 justify-center items-center text-xl font-semibold',
@@ -26,6 +39,16 @@ export const Cart: React.FC<Props> = ({ className }) => {
 
   if (productsQuery.isInitail || productsQuery.isFetching) {
     return <div className={fallbackClassName}>Loading...</div>;
+  }
+  if (createdOrderId) {
+    return (
+      <div className={fallbackClassName}>
+        <div className="grid gap-4">
+          {`Order #${createdOrderId} has been placed`}
+          {showcaseLink}
+        </div>
+      </div>
+    );
   }
   if (productsQuery.error) {
     return (
@@ -44,12 +67,7 @@ export const Cart: React.FC<Props> = ({ className }) => {
       <div className={fallbackClassName}>
         <div className="grid justify-items-center gap-4">
           Cart is empty
-          <Link
-            href="/"
-            className="text-md rounded-lg bg-teal-100 px-3 py-1.5 font-medium text-slate-800 hover:bg-teal-200 active:bg-teal-50"
-          >
-            To showcase
-          </Link>
+          {showcaseLink}
         </div>
       </div>
     );
@@ -65,18 +83,20 @@ export const Cart: React.FC<Props> = ({ className }) => {
     const result = await placeOrderMutation.mutate(productsQuery.data);
     if (result instanceof Error) {
       toast('Failed to place order', {
-        icon: '❌',
+        icon: <XOctagonIcon className="text-red-500" aria-hidden />,
         duration: 3000,
         position: 'top-center',
       });
     } else {
       cartModel.clearCart();
+      setCreatedOrderId(result.orderId);
     }
   };
 
   return (
     <div className={cn('grid content-start gap-6', className)}>
       <Toaster />
+      <p className="text-2xl font-semibold max-md:px-4">Cart</p>
       <ul className="grid gap-4">
         {productsQuery.data.map((product) => {
           return (
