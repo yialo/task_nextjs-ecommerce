@@ -17,20 +17,23 @@ export const ProductCartCard: React.FC<Props> = ({
   const { id, name, price } = product;
 
   return (
-    <article className={cn('flex', className)}>
+    <article
+      className={cn(
+        'bg-ghost grid grid-cols-[auto_1fr] grid-rows-[1fr_auto_auto] gap-4 rounded-xl bg-[#f8f8ff] p-4 md:grid-cols-[auto_1fr_auto] md:grid-rows-[1fr_auto]',
+        className,
+      )}
+    >
       <Link
         href={`/product/${id}`}
-        className="w-24 shrink-0 overflow-hidden rounded-md"
+        className="row-start-1 row-end-[-1] w-24 shrink-0 overflow-hidden rounded-md"
       >
         <ProductImage product={product} />
       </Link>
-      <div className="grow">
-        <Link href={`/product/${id}`}>
-          <h2>{name}</h2>
-        </Link>
-        <div>{price}</div>
-      </div>
-      <div className="shrink-0">{button}</div>
+      <Link href={`/product/${id}`} className="col-start-2 col-end-[-1]">
+        <h2 className="text-xl max-md:line-clamp-2">{name}</h2>
+      </Link>
+      <div className="row-start-2 text-lg font-medium">{price}</div>
+      <div className="shrink-0 self-end">{button}</div>
     </article>
   );
 };

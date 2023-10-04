@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 const CartPage: React.FC = () => {
   return (
-    <main className="page-center-container flex grow flex-col px-8 py-4">
-      <h1 className="mb-6 text-2xl font-semibold">Cart</h1>
+    <main className="page-center-container flex grow flex-col py-4 md:px-8">
+      <h1 className="mb-6 text-2xl font-semibold max-md:px-4">Cart</h1>
       <Cart className="grow" />
     </main>
   );

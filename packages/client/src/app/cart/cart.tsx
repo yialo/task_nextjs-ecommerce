@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { TrashIcon } from 'lucide-react';
 import { ProductCartCard } from '@/entities/product';
 import { useCartModel } from '@/features/cart-in-out/model';
 import { cn } from '@/shared/lib/cn';
@@ -55,34 +56,37 @@ export const Cart: React.FC<Props> = ({ className }) => {
               className={productsQuery.isFetching ? 'opacity-80' : undefined}
             >
               <ProductCartCard
-                className="w-full max-w-[756px]"
+                className="max-w-[756px]"
                 product={product}
                 button={
-                  <Button
-                    variant="neutral"
+                  <button
+                    className="rounded-md bg-zinc-100 px-3 py-2 text-zinc-600 hover:bg-zinc-200 active:bg-zinc-300"
+                    type="button"
                     onClick={() => {
                       removeProductId(product.id);
                     }}
                   >
                     Remove
-                  </Button>
+                  </button>
                 }
               />
             </li>
           );
         })}
       </ul>
-      <div className="text-xl">
+      <div className="text-xl max-md:px-4">
         Total: <span className="font-semibold">{`$${orderTotal}`}</span>
       </div>
-      <Button
-        className="md:w-1/2 md:justify-self-start"
-        onClick={() => {
-          console.log('Place order');
-        }}
-      >
-        Place order
-      </Button>
+      <div className="w-full max-w-[400px] max-md:px-4 md:justify-self-start">
+        <Button
+          className="w-full"
+          onClick={() => {
+            console.log('Place order');
+          }}
+        >
+          Place order
+        </Button>
+      </div>
     </div>
   );
 };
