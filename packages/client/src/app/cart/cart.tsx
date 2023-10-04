@@ -1,23 +1,26 @@
 'use client';
 
 import * as React from 'react';
+import { ProductCartCard } from '@/entities/product';
 import { useCartModel } from '@/features/cart-in-out/model';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
-import { useCartProductsQuery } from './api';
+import { placeOrder, useCartProductsQuery } from './api';
 
 interface Props {
   className?: string;
 }
 
 export const Cart: React.FC<Props> = ({ className }) => {
-  const { productIds } = useCartModel();
+  const { productIds, removeProductId } = useCartModel();
   const productsQuery = useCartProductsQuery(productIds);
 
   const fallbackClassName = cn(
     'flex text-slate-600 justify-center items-center text-xl font-semibold',
     className,
   );
+
+  console.log({ productIds, productsQuery });
 
   if (productsQuery.isInitail || productsQuery.isFetching) {
     return <div className={fallbackClassName}>Loading...</div>;
@@ -43,18 +46,33 @@ export const Cart: React.FC<Props> = ({ className }) => {
     .toFixed(2);
 
   return (
-    <div className={cn('grid content-start', className)}>
-      <ul>
+    <div className={cn('grid content-start gap-6', className)}>
+      <ul className="grid gap-4">
         {productsQuery.data.map((product) => {
           return (
-            <li key={product.id}>
-              <div>{product.name}</div>
-              <div>{product.price}</div>
+            <li
+              key={product.id}
+              className={productsQuery.isFetching ? 'opacity-80' : undefined}
+            >
+              <ProductCartCard
+                className="w-full max-w-[756px]"
+                product={product}
+                button={
+                  <Button
+                    variant="neutral"
+                    onClick={() => {
+                      removeProductId(product.id);
+                    }}
+                  >
+                    Remove
+                  </Button>
+                }
+              />
             </li>
           );
         })}
       </ul>
-      <div>
+      <div className="text-xl">
         Total: <span className="font-semibold">{`$${orderTotal}`}</span>
       </div>
       <Button

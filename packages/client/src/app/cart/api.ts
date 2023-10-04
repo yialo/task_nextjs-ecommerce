@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Product, readProductsByIds } from '@/entities/product';
+import { API_URL_BASE } from '@/shared/config';
 
 interface QueryState {
   data: Product[];
@@ -8,16 +9,14 @@ interface QueryState {
   isInitail: boolean;
 }
 
-const INITIAL_QUERY_STATE: QueryState = {
-  data: [],
-  error: null,
-  isFetching: false,
-  isInitail: true,
-};
-
 export const useCartProductsQuery = (productIds: number[]) => {
-  const [productsQuery, setProductsQuery] =
-    React.useState<QueryState>(INITIAL_QUERY_STATE);
+  const [productsQuery, setProductsQuery] = React.useState<QueryState>({
+    data: [],
+    error: null,
+    isFetching: false,
+    isInitail: true,
+  });
+  const [retryTrigger, setRetryTrigger] = React.useState(false);
 
   React.useEffect(() => {
     const sendQuery = async () => {
@@ -45,17 +44,32 @@ export const useCartProductsQuery = (productIds: number[]) => {
       }
     };
 
-    if (productsQuery.isInitail) {
-      sendQuery();
-    }
-  }, [productIds, productsQuery.isInitail]);
+    sendQuery();
+  }, [productIds, retryTrigger]);
 
   const retry = React.useCallback(() => {
-    setProductsQuery(INITIAL_QUERY_STATE);
+    setRetryTrigger((prev) => !prev);
   }, []);
 
   return {
     ...productsQuery,
     retry,
   };
+};
+
+export const placeOrder = async (products: Product[]) => {
+  const payload = products.map(({ id, sizes }) => ({
+    id,
+    size: sizes[0],
+  }));
+
+  const response = await fetch(`${API_URL_BASE}/checkout/placeOrder`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ products: payload }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to place order');
+  }
 };
