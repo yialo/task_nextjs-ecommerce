@@ -57,7 +57,7 @@ export const useCartProductsQuery = (productIds: number[]) => {
   };
 };
 
-export const placeOrder = async (products: Product[]) => {
+const placeOrder = async (products: Product[]) => {
   const payload = products.map(({ id, sizes }) => ({
     id,
     size: sizes[0],
@@ -72,4 +72,39 @@ export const placeOrder = async (products: Product[]) => {
   if (!response.ok) {
     throw new Error('Failed to place order');
   }
+};
+
+interface OrderMutationState {
+  error: Error | null;
+  isLoading: boolean;
+}
+
+export const usePlaceOrderMutation = () => {
+  const [state, setState] = React.useState<OrderMutationState>({
+    error: null,
+    isLoading: false,
+  });
+
+  const mutate = React.useCallback(
+    async (products: Product[]) => {
+      setState({ error: null, isLoading: true });
+
+      try {
+        await placeOrder(products);
+        setState((prev) => ({ ...prev, error: null, isLoading: false }));
+      } catch (error) {
+        setState((prev) => ({
+          ...prev,
+          error: error instanceof Error ? error : new Error('Unknown error'),
+          isLoading: false,
+        }));
+      }
+    },
+    [setState],
+  );
+
+  return {
+    mutate,
+    ...state,
+  };
 };

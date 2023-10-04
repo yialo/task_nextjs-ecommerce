@@ -4,6 +4,7 @@ interface Props {
   children: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
+  disabled?: boolean;
   type?: HTMLButtonElement['type'];
   variant?: 'positive' | 'negative' | 'neutral';
 }
@@ -11,6 +12,7 @@ interface Props {
 export const Button: React.FC<Props> = ({
   children,
   className,
+  disabled,
   type = 'button',
   variant = 'positive',
   onClick,
@@ -29,6 +31,7 @@ export const Button: React.FC<Props> = ({
         },
         className,
       )}
+      disabled={disabled}
       type={type}
       onClick={onClick}
     >
