@@ -57,7 +57,9 @@ export const useCartProductsQuery = (productIds: number[]) => {
   };
 };
 
-const placeOrder = async (products: Product[]) => {
+const placeOrder = async (
+  products: Product[],
+): Promise<{ orderId: number }> => {
   const payload = products.map(({ id, sizes }) => ({
     id,
     size: sizes[0],
@@ -72,6 +74,8 @@ const placeOrder = async (products: Product[]) => {
   if (!response.ok) {
     throw new Error('Failed to place order');
   }
+
+  return response.json();
 };
 
 interface OrderMutationState {
@@ -90,14 +94,18 @@ export const usePlaceOrderMutation = () => {
       setState({ error: null, isLoading: true });
 
       try {
-        await placeOrder(products);
+        const result = await placeOrder(products);
         setState((prev) => ({ ...prev, error: null, isLoading: false }));
-      } catch (error) {
+        return result;
+      } catch (maybeError) {
+        const error =
+          maybeError instanceof Error ? maybeError : new Error('Unknown error');
         setState((prev) => ({
           ...prev,
-          error: error instanceof Error ? error : new Error('Unknown error'),
+          error,
           isLoading: false,
         }));
+        return error;
       }
     },
     [setState],

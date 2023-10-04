@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { ProductCartCard } from '@/entities/product';
 import { useCartModel } from '@/features/cart-in-out/model';
 import { cn } from '@/shared/lib/cn';
@@ -12,8 +13,8 @@ interface Props {
 }
 
 export const Cart: React.FC<Props> = ({ className }) => {
-  const { productIds, removeProductId } = useCartModel();
-  const productsQuery = useCartProductsQuery(productIds);
+  const cartModel = useCartModel();
+  const productsQuery = useCartProductsQuery(cartModel.productIds);
 
   const placeOrderMutation = usePlaceOrderMutation();
 
@@ -47,8 +48,22 @@ export const Cart: React.FC<Props> = ({ className }) => {
 
   const isUiPending = productsQuery.isFetching || placeOrderMutation.isLoading;
 
+  const handlePlaceOrderClick = async () => {
+    const result = await placeOrderMutation.mutate(productsQuery.data);
+    if (result instanceof Error) {
+      toast('Failed to place order', {
+        icon: '❌',
+        duration: 3000,
+        position: 'top-center',
+      });
+    } else {
+      cartModel.clearCart();
+    }
+  };
+
   return (
     <div className={cn('grid content-start gap-6', className)}>
+      <Toaster />
       <ul className="grid gap-4">
         {productsQuery.data.map((product) => {
           return (
@@ -67,7 +82,7 @@ export const Cart: React.FC<Props> = ({ className }) => {
                     type="button"
                     disabled={isUiPending}
                     onClick={() => {
-                      removeProductId(product.id);
+                      cartModel.removeProductId(product.id);
                     }}
                   >
                     Remove
@@ -85,9 +100,7 @@ export const Cart: React.FC<Props> = ({ className }) => {
         <Button
           className="w-full"
           disabled={isUiPending}
-          onClick={() => {
-            placeOrderMutation.mutate(productsQuery.data);
-          }}
+          onClick={handlePlaceOrderClick}
         >
           Place order
         </Button>
