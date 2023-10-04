@@ -11,7 +11,7 @@ const HomePage: React.FC = async () => {
   return (
     <main className="page-center-container p-4">
       <h1 className="sr-only">{APP_TITLE}</h1>
-      <div className="mb-2 flex items-baseline justify-between px-4">
+      <div className="mb-2.5 flex items-baseline justify-between px-4">
         <div className="text-2xl font-bold">Product list</div>
         <div>{`Total products count: ${products.length}`}</div>
       </div>

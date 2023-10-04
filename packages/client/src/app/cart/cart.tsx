@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import * as React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { ProductCartCard } from '@/entities/product';
@@ -39,7 +40,19 @@ export const Cart: React.FC<Props> = ({ className }) => {
     );
   }
   if (!productsQuery.data.length) {
-    return <div className={fallbackClassName}>Cart is empty</div>;
+    return (
+      <div className={fallbackClassName}>
+        <div className="grid justify-items-center gap-4">
+          Cart is empty
+          <Link
+            href="/"
+            className="text-md rounded-lg bg-teal-100 px-3 py-1.5 font-medium text-slate-800 hover:bg-teal-200 active:bg-teal-50"
+          >
+            To showcase
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const orderTotal = productsQuery.data

@@ -27,7 +27,7 @@ export const PageHeader: React.FC<Props> = ({ className }) => {
         />
         <nav className="justify-content flex grow items-center gap-x-8">
           <Link href="/" className="text-lg font-bold hover:text-slate-600">
-            Products
+            Showcase
           </Link>
           <Link
             href="/cart"
