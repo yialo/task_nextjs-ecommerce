@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ProductShowcaseCard, readAllProducts } from '@/entities/product';
-import { CartInOutButton } from '@/features/cart-in-out/ui';
+import { CartInOutButton } from '@/features/cart-in-out';
 import { APP_TITLE } from '@/shared/config';
 
 export const dynamic = 'force-dynamic';

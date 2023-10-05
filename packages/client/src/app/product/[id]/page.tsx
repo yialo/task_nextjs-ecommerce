@@ -2,7 +2,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { ArrowLeftIcon } from 'lucide-react';
 import { ProductImage, readProductById } from '@/entities/product';
-import { CartInOutButton } from '@/features/cart-in-out/ui';
+import { CartInOutButton } from '@/features/cart-in-out';
 
 const unescapeHtml = (escapedHtml: string) => {
   return escapedHtml

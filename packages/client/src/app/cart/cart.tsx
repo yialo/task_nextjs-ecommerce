@@ -5,7 +5,7 @@ import * as React from 'react';
 import { XOctagonIcon } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { ProductCartCard } from '@/entities/product';
-import { useCartModel } from '@/features/cart-in-out/model';
+import { useCartModel } from '@/features/cart-in-out';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/button';
 import { useCartProductsQuery, usePlaceOrderMutation } from './api';

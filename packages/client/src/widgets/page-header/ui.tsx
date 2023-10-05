@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCartIcon } from 'lucide-react';
-import { CartCounterBadge } from '@/features/cart-in-out/ui';
+import { CartCounterBadge } from '@/features/cart-in-out';
 import { APP_TITLE } from '@/shared/config';
 import { cn } from '@/shared/lib/cn';
 
